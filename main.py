@@ -1,40 +1,33 @@
 from tkinter import *
 
 
-def button_click():
-    my_label['text'] = entry.get()  # gets entry input
+def convert_mile_to_kilometer():
+    km = float(entry.get()) * 1.609
+    text_3.config(text=round(km, 2))
 
 
 window = Tk()
-window.title('My First GUI Program')
-window.minsize(width=500, height=300)
-window.config(padx=20, pady=20)  # Adding padding to the entire screen
+window.title('Mile to Kilometer conversion')
+window.minsize(width=200, height=200)
+window.config(padx=30, pady=30)
 
-# Label component
-my_label = Label(text="I am a label", font=('Arial', 24, 'bold'))
-# Pack, Place and Grid examples - Layouts
-# Note: We can't mix up pack(). place() and grid() for different components
-# my_label.pack(side='left')
-# my_label.place(x=0, y=0)
-my_label.grid(column=0, row=0)  # Grid is highly used for layouts
-my_label.config(padx=50, pady=50)
+entry = Entry()
+entry.grid(row=0, column=1)
 
-# my_label['text'] = 'New Text 1'  # Changing the kwarg 'text'
-# my_label.config(text='New Text 2')
+text_1 = Label(text='miles')
+text_1.grid(row=0, column=2)
 
-# Button component
-button_1 = Button(text='Click Me!', command=button_click)
-# button.pack()
-button_1.grid(column=1, row=1)
+text_2 = Label(text='is equal to')
+text_2.grid(row=1, column=0)
 
-button_2 = Button(text='Click Me!', command=button_click)
-# button.pack()
-button_2.grid(column=2, row=0)
+text_3 = Label(text='0')
+text_3.grid(row=1, column=1)
 
-# Entry component - We can give our input in this box
-entry = Entry(width=30)
-entry.insert(END, string='Some text to begin with')  # Inserts a default text to the entry
-# entry.pack()
-entry.grid(column=3, row=2)
+button = Button(text='Calculate', command=convert_mile_to_kilometer)
+button.grid(row=2, column=1)
+
+text_4 = Label(text='km')
+text_4.grid(row=1, column=2)
+
 
 window.mainloop()
