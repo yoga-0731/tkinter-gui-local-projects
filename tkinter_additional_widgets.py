@@ -64,4 +64,11 @@ for item in fruits:
 listbox.bind("<<ListboxSelect>>", listbox_used)
 listbox.pack()
 
+# Canvas
+canvas = Canvas(width=200, height=224)  # Inserts a layout one over another. Example: text over an image
+tomato = PhotoImage(file='tomato.png')
+canvas.create_image(102, 112, image=tomato)
+canvas.create_text(102, 130, text="00:00", fill='white', font=('Ariel', 25, 'bold'))  # Inserts this text over the image
+canvas.pack()
+
 window.mainloop()
