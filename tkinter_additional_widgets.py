@@ -11,7 +11,6 @@ text.insert(END, 'Example of multi-line string entry')
 print(text.get('1.0', END))
 text.pack()
 
-
 # Spinbox
 def spinbox_used():
     print(spinbox.get())
@@ -70,5 +69,9 @@ tomato = PhotoImage(file='tomato.png')
 canvas.create_image(102, 112, image=tomato)
 canvas.create_text(102, 130, text="00:00", fill='white', font=('Ariel', 25, 'bold'))  # Inserts this text over the image
 canvas.pack()
+
+# Dialog box
+from tkinter import messagebox  # Module
+messagebox.askyesno(title='Check data', message='Do you wish to proceed with the data?')
 
 window.mainloop()
