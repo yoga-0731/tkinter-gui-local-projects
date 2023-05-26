@@ -2,6 +2,7 @@ from random import randint, shuffle, choice
 from tkinter import *
 from tkinter import messagebox
 import pyperclip  # Copy and paste clipboard functions
+import json
 
 window = Tk()
 window.title('Password Generator')
@@ -28,7 +29,6 @@ def generate_password():
     password_entry.insert(0, password)
     pyperclip.copy(password)
     print(pyperclip.paste())
-    print(f"Your password is: {password}")
 
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
@@ -36,14 +36,34 @@ def save():
     website = website_entry.get()
     email = email_entry.get()
     given_password = password_entry.get()
+    new_data = {
+        website: {
+            "email": email,
+            "password": given_password
+        }
+    }
+
     if len(website) == 0 or len(given_password) == 0:
         messagebox.showwarning(title='Empty field', message="You hav empty field. Please do fill all the fields!")
     else:
         save_data = messagebox.askyesno(title=website, message=f"Verify if you want to proceed with these details:"
                                                                f"\nEmail: {email}\nPassword: {given_password}")
         if save_data:
-            with open('data.txt', mode='a') as file:
-                file.write(f"{website} | {email} | {given_password}\n")
+            # with open('data.txt', mode='a') as file:
+            #     file.write(f"{website} | {email} | {given_password}\n")
+
+            # Exception handling
+            try:
+                with open('data.json', 'r') as data_file:
+                    data = json.load(data_file)  # Reading a json file
+            except FileNotFoundError:
+                with open('data.json', 'w') as data_file:
+                    json.dump(new_data, data_file, indent=4)
+            else:
+                data.update(new_data)  # Update a json data
+                with open('data.json', 'w') as data_file:
+                    json.dump(data, data_file, indent=4)  # Creating a json file, and dump data to it
+            finally:
                 website_entry.delete(0, END)
                 password_entry.delete(0, END)
 
