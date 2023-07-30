@@ -1,4 +1,4 @@
-# Languages learning flashcard app
+# Language learning flashcard app
 
   - A list of 100 French words and it's English match are collected in a csv.
   - Using Pandas, the csv is read and using Tkinter, the words are displayed on a card in the screen.
